@@ -28,5 +28,9 @@ export const routes: Routes = [
         loadComponent: () => import('./main-menu/activity/activity.page').then( m => m.ActivityPage)
       },
     ]
+  },
+  {
+    path: 'add-new',
+    loadComponent: () => import('./modals/add-new/add-new.page').then( m => m.AddNewPage)
   }
 ];

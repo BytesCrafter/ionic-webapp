@@ -1,5 +1,6 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'app-tabs',
@@ -11,9 +12,11 @@ import { IonicModule } from '@ionic/angular';
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
-  constructor() {}
+  constructor(
+    private modalSvcs: ModalService
+  ) {}
 
   addNew() {
-    alert("Debug: New Content!");
+    this.modalSvcs.showModal();
   }
 }
