@@ -26,7 +26,7 @@
     <ion-content>
       <ion-list>
         <ion-item routerLink="/home" routerDirection="root">Home</ion-item>
-        <ion-item>Dark Theme: <ion-toggle id="themeToggle" slot="end" (ionChange)="switchTheme($event)"></ion-toggle></ion-item>
+        <ion-item>Dark Theme: <ion-toggle slot="end" [checked]="isDarkMode" (ionChange)="switchTheme($event)"></ion-toggle></ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>

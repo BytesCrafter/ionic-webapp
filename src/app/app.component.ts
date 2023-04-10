@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   public isLoaded: boolean = false;
+  public isDarkMode: boolean = false;
   @ViewChild(IonMenu, { static: true }) menu!: IonMenu;
   public environmentInjector = inject(EnvironmentInjector);
 
@@ -29,7 +30,7 @@ export class AppComponent {
     // TEMP: Test the loading.
     setTimeout(() => {
       this.isLoaded = true;
-    }, 3000)
+    }, 1200)
 
     this.checkTheme();
   }
@@ -39,7 +40,9 @@ export class AppComponent {
     const curTheme = themeSet ? themeSet : 'auto';
 
     if(curTheme !== 'auto') {
-      this.changeTheme(curTheme=='dark'?true:false);
+      var onDark: boolean = curTheme=='dark'?true:false;
+      this.isDarkMode = onDark;
+      this.changeTheme(onDark);
     }
   }
 
