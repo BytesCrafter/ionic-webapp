@@ -1,4 +1,5 @@
 <ion-app>
+
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -8,10 +9,27 @@
       </ion-buttons>
       <ion-title>Ionic App</ion-title>
       <ion-buttons slot="end">
-        <ion-toggle id="themeToggle" slot="end" (ionChange)="switchTheme($event)"></ion-toggle>
+        <ion-button (click)="openMenu()">
+          <ion-icon name="grid"></ion-icon>
+        </ion-button>
       </ion-buttons>
       <ion-progress-bar *ngIf="!isLoaded" type="indeterminate"></ion-progress-bar>
     </ion-toolbar>
   </ion-header>
+
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Side Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/home" routerDirection="root">Home</ion-item>
+        <ion-item>Dark Theme: <ion-toggle id="themeToggle" slot="end" (ionChange)="switchTheme($event)"></ion-toggle></ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

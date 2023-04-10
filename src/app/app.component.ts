@@ -1,5 +1,5 @@
-import { Component, EnvironmentInjector, Inject, inject } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Component, EnvironmentInjector, Inject, ViewChild, inject } from '@angular/core';
+import { IonMenu, IonicModule } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   public isLoaded: boolean = false;
+  @ViewChild(IonMenu, { static: true }) menu!: IonMenu;
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor(
@@ -58,5 +59,9 @@ export class AppComponent {
 
   gotoHome() {
     this.router.navigate(['/home']);
+  }
+
+  openMenu() {
+    this.menu.toggle();
   }
 }
