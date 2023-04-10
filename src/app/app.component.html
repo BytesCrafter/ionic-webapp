@@ -1,3 +1,7 @@
 <ion-app>
+  <ion-item lines="full">
+    <ion-icon slot="end" name="moon"></ion-icon>
+    <ion-toggle id="themeToggle" slot="end" (ionChange)="switchTheme($event)"></ion-toggle>
+  </ion-item>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>
