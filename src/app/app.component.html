@@ -1,7 +1,17 @@
 <ion-app>
-  <ion-item lines="full">
-    <ion-icon slot="end" name="moon"></ion-icon>
-    <ion-toggle id="themeToggle" slot="end" (ionChange)="switchTheme($event)"></ion-toggle>
-  </ion-item>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="gotoHome()">
+          <ion-img src="assets/icon/favicon.png" alt="logo" style="width: 50%;"></ion-img>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>Ionic App</ion-title>
+      <ion-buttons slot="end">
+        <ion-toggle id="themeToggle" slot="end" (ionChange)="switchTheme($event)"></ion-toggle>
+      </ion-buttons>
+      <ion-progress-bar *ngIf="!isLoaded" type="indeterminate"></ion-progress-bar>
+    </ion-toolbar>
+  </ion-header>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

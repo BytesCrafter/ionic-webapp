@@ -1,6 +1,7 @@
 import { Component, EnvironmentInjector, Inject, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,12 @@ import { CommonModule, DOCUMENT } from '@angular/common';
   imports: [IonicModule, CommonModule],
 })
 export class AppComponent {
+  public isLoaded: boolean = false;
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor(
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private router: Router
   ) {
     // Use matchMedia to check the user preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: light)');
@@ -21,6 +24,11 @@ export class AppComponent {
     //check if system is on light.
     const isLight: boolean = prefersDark.matches;
     console.log("System theme is "+(isLight?'light':'dark'));
+
+    // TEMP: Test the loading.
+    setTimeout(() => {
+      this.isLoaded = true;
+    }, 3000)
 
     this.checkTheme();
   }
@@ -46,5 +54,9 @@ export class AppComponent {
     //save the theme state
     const isDark = this.document.body.classList.contains('dark');
     localStorage.setItem('app-color-scheme', isDark?'dark':'light');
+  }
+
+  gotoHome() {
+    this.router.navigate(['/home']);
   }
 }
