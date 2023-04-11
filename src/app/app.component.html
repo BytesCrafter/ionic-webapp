@@ -20,12 +20,21 @@
   <ion-menu side="end" contentId="main-content">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Side Menu</ion-title>
+        <ion-title>Main Menu</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-list>
-        <ion-item routerLink="/home" routerDirection="root">Home</ion-item>
+      <ion-menu-toggle auto-hide="false">
+        <ion-list>
+          <ion-list-header>Our Pages</ion-list-header>
+          <ion-item routerLink="/home" routerDirection="root">
+            <ion-icon aria-hidden="true" slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
+            Home
+          </ion-item>
+        </ion-list>
+      </ion-menu-toggle>
+      <ion-list style="margin-top: 2.5em;">
+        <ion-list-header>Options</ion-list-header>
         <ion-item>Dark Theme: <ion-toggle slot="end" [checked]="isDarkMode" (ionChange)="switchTheme($event)"></ion-toggle></ion-item>
       </ion-list>
     </ion-content>
