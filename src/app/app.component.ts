@@ -1,14 +1,14 @@
 import { Component, EnvironmentInjector, Inject, ViewChild, inject } from '@angular/core';
 import { IonMenu, IonicModule } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [IonicModule, RouterLink, RouterLinkActive, CommonModule],
 })
 export class AppComponent {
   public isLoaded: boolean = false;
