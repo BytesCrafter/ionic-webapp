@@ -30,6 +30,10 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'onboarding',
+    loadComponent: () => import('./info/onboarding/onboarding.page').then( m => m.OnboardingPage)
+  },
+  {
     path: 'add-new',
     loadComponent: () => import('./modals/add-new/add-new.page').then( m => m.AddNewPage)
   }

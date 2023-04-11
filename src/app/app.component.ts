@@ -1,7 +1,7 @@
 import { Component, EnvironmentInjector, Inject, ViewChild, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +15,14 @@ export class AppComponent {
   public isDarkMode: boolean = false;
 
   constructor(
+    private router: Router,
     @Inject(DOCUMENT) private document: Document,
   ) {
+    let onboarded = localStorage.getItem('app-onboarding-completed');
+    if(!onboarded) {
+      this.router.navigate(['/onboarding']);
+    }
+
     // Use matchMedia to check the user preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: light)');
 
