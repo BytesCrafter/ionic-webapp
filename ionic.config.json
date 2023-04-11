@@ -1,5 +1,5 @@
 {
-  "name": "pusta.app",
+  "name": "ionic.app",
   "integrations": {
     "capacitor": {}
   },
