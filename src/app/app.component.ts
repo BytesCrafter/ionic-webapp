@@ -1,7 +1,7 @@
 import { Component, EnvironmentInjector, Inject, ViewChild, inject } from '@angular/core';
-import { IonMenu, IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +11,11 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
   imports: [IonicModule, RouterLink, RouterLinkActive, CommonModule],
 })
 export class AppComponent {
-  public isLoaded: boolean = false;
-  public isDarkMode: boolean = false;
-  @ViewChild(IonMenu, { static: true }) menu!: IonMenu;
   public environmentInjector = inject(EnvironmentInjector);
+  public isDarkMode: boolean = false;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private router: Router
   ) {
     // Use matchMedia to check the user preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: light)');
@@ -26,11 +23,6 @@ export class AppComponent {
     //check if system is on light.
     const isLight: boolean = prefersDark.matches;
     console.log("System theme is "+(isLight?'light':'dark'));
-
-    // TEMP: Test the loading.
-    setTimeout(() => {
-      this.isLoaded = true;
-    }, 1200)
 
     this.checkTheme();
   }
@@ -58,13 +50,5 @@ export class AppComponent {
     //save the theme state
     const isDark = this.document.body.classList.contains('dark');
     localStorage.setItem('app-color-scheme', isDark?'dark':'light');
-  }
-
-  gotoHome() {
-    this.router.navigate(['/home']);
-  }
-
-  openMenu() {
-    this.menu.toggle();
   }
 }

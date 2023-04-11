@@ -1,3 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="gotoHome()">
+        <ion-img src="assets/icon/favicon.png" alt="logo" style="width: 50%;"></ion-img>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Ionic App</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openMenu()">
+        <ion-icon name="grid"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-progress-bar *ngIf="!isLoaded" type="indeterminate"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
 <ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home">
