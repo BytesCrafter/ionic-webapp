@@ -1,7 +1,8 @@
-import { Component, EnvironmentInjector, Inject, ViewChild, inject } from '@angular/core';
+import { Component, EnvironmentInjector, Inject, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { FirebaseService } from './services/firebase.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent {
 
   constructor(
     private router: Router,
+    private firebase: FirebaseService,
     @Inject(DOCUMENT) private document: Document,
   ) {
     let onboarded = localStorage.getItem('app-onboarding-completed');
