@@ -1,7 +1,8 @@
-import { Component, EnvironmentInjector, Inject, ViewChild, inject } from '@angular/core';
+import { Component, EnvironmentInjector, Inject, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { FirebaseService } from './services/firebase.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,8 @@ export class AppComponent {
   public isDarkMode: boolean = false;
 
   constructor(
+    private router: Router,
+    private firebase: FirebaseService,
     @Inject(DOCUMENT) private document: Document,
   ) {
     // Use matchMedia to check the user preference
