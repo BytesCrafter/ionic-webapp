@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-account',
@@ -18,7 +19,8 @@ export class AccountPage implements OnInit {
 
   constructor(
     private router: Router,
-    private app: AppComponent
+    private app: AppComponent,
+    private modal: ModalService
   ) { }
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class AccountPage implements OnInit {
   }
 
   goToPassword() {
-    //this.modalSvc.showPasswords();
+    this.modal.showPasswords();
   }
 
   logout() {
