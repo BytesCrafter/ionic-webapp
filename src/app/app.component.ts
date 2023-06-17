@@ -33,7 +33,6 @@ export class AppComponent {
 
     if(curTheme !== 'auto') {
       var onDark: boolean = curTheme=='dark'?true:false;
-      this.isDarkMode = onDark;
       this.changeTheme(onDark);
     }
   }
@@ -50,5 +49,6 @@ export class AppComponent {
     //save the theme state
     const isDark = this.document.body.classList.contains('dark');
     localStorage.setItem('app-color-scheme', isDark?'dark':'light');
+    this.isDarkMode = isDark?true:false;
   }
 }
