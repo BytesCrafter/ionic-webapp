@@ -1,4 +1,4 @@
-import { Component, EnvironmentInjector, Inject, ViewChild, inject } from '@angular/core';
+import { Component, EnvironmentInjector, Inject, inject, HostListener } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -50,5 +50,10 @@ export class AppComponent {
     const isDark = this.document.body.classList.contains('dark');
     localStorage.setItem('app-color-scheme', isDark?'dark':'light');
     this.isDarkMode = isDark?true:false;
+  }
+
+  @HostListener('document:keydown.control.shift.alt', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    this.changeTheme(!this.isDarkMode);
   }
 }
