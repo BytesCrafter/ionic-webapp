@@ -30,7 +30,9 @@ export class LoginPage implements OnInit {
     private util: UtilService,
     private auth: AuthService,
   ) {
-
+    if(auth.isAuthenticated) {
+      router.navigateByUrl('/home');
+    }
   }
 
   ngOnInit() {
