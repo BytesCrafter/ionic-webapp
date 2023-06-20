@@ -5,7 +5,6 @@ import { IonicModule, MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UtilService } from 'src/app/services/util.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +29,6 @@ export class LoginPage implements OnInit {
     private router: Router,
     private util: UtilService,
     private auth: AuthService,
-    private app: AppComponent
   ) {
 
   }
@@ -52,7 +50,7 @@ export class LoginPage implements OnInit {
       this.util.modalAlert('Notification', 'Please enter valid email');
       return;
     }
-    this.app.isloading = true;
+    this.util.setSpinnerStatus = true;
 
     this.auth.login(this.email, this.password, (result: any) => {
       if(result.success) {
@@ -72,7 +70,7 @@ export class LoginPage implements OnInit {
       }
 
       this.loggedIn = false;
-      this.app.isloading = false;
+      this.util.setSpinnerStatus = false;
     });
   }
 }
