@@ -14,8 +14,8 @@ export class AuthService {
   public static tokenKey: any = 'syntry-token';
   public currentUser: any = null;
 
-  private subject: BehaviorSubject<Token>;
-  private observable: Observable<Token>;
+  private tokenSubject: BehaviorSubject<Token>;
+  private tokenObservable: Observable<Token>;
 
   private permitSubject: BehaviorSubject<Permission>;
   private permitObservable: Observable<Permission>;
@@ -32,19 +32,11 @@ export class AuthService {
       //const isExpired = jwt.isTokenExpired(token);
     }
 
-    this.subject = new BehaviorSubject<Token>(token);
-    this.observable = this.subject.asObservable();
+    this.tokenSubject = new BehaviorSubject<Token>(token);
+    this.tokenObservable = this.tokenSubject.asObservable();
 
-    this.permitSubject = new BehaviorSubject<Permission>(null);
+    this.permitSubject = new BehaviorSubject<Permission>(new Permission());
     this.permitObservable = this.permitSubject.asObservable();
-  }
-
-  public get userPermits(): Permission {
-    if(this.isAuthenticated && typeof this.permitSubject.value !== 'undefined') {
-      return this.permitSubject.value;
-    }
-
-    return null;
   }
 
   public get isAuthenticated(): boolean {
@@ -56,23 +48,31 @@ export class AuthService {
     return true;
   }
 
+  public get userPermits(): Permission {
+    if(this.isAuthenticated && typeof this.permitSubject.value !== 'undefined') {
+      return this.permitSubject.value;
+    }
+
+    return new Permission();
+  }
+
   public get userToken(): Token {
     if(this.isAuthenticated) {
       const jwtHash = localStorage.getItem(AuthService.tokenKey);
       if(jwtHash != null && jwtHash !== '') {
         const token = this.util.jwtDecode(jwtHash);
-        this.subject.next(token);
-        return this.subject.value;
+        this.tokenSubject.next(token);
+        return this.tokenSubject.value;
       }
     } //TODO: Verify if okay to notfound return anything when nulled.
 
-    return null;
+    return new Token();
   }
 
   public set setToken(jwtHash: string) {
     localStorage.setItem(AuthService.tokenKey, jwtHash);
     const token = this.util.jwtDecode(jwtHash);
-    this.subject.next(token);
+    this.tokenSubject.next(token);
   }
 
   getInfo() {
@@ -93,7 +93,7 @@ export class AuthService {
       if(res && res.success === true && res.data) {
         localStorage.setItem(AuthService.tokenKey, res.data);
         const decoded: Token = this.util.jwtDecode(res.data);
-        this.subject.next(decoded);
+        this.tokenSubject.next(decoded);
         callback({ success: res.success, data: decoded });
       } else {
         callback({ success: res.success, message: res.message });
@@ -128,7 +128,7 @@ export class AuthService {
   logout() {
       // remove user from local storage to log user out
       localStorage.removeItem(AuthService.tokenKey);
-      this.subject.next(null);
+      this.tokenSubject.next(new Token());
       this.router.navigate(['/login']);
   }
 }
