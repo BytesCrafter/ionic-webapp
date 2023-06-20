@@ -3,6 +3,8 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgxLoadingModule } from 'ngx-loading';
+import { UtilService } from './services/util.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,8 @@ export class AppComponent {
 
   constructor(
     private router: Router,
+    private util: UtilService,
+    private auth: AuthService,
     @Inject(DOCUMENT) private document: Document,
   ) {
     let onboarded = localStorage.getItem('app-onboarding-completed');
@@ -33,6 +37,10 @@ export class AppComponent {
     console.log("System theme is "+(isLight?'light':'dark'));
 
     this.checkTheme();
+
+    //Only load if app is reloaded.
+    this.auth.getInfo();
+    this.auth.loadPermission();
   }
 
   checkTheme() {
