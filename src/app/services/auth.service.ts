@@ -67,6 +67,10 @@ export class AuthService {
   }
 
   getInfo() {
+    if(!this.isAuthenticated) {
+      return;
+    }
+
     this.api.posts('users/get_user_info', {}).then((res: any) => {
       if(res && res.success === true && res.data) {
         this.tokenSubject.next( (new Token()).setInfo(res.data) );
