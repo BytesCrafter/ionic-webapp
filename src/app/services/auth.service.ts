@@ -12,7 +12,6 @@ import { Permission } from '../model/permission.model';
 export class AuthService {
 
   public static tokenKey: any = 'syntry-token';
-  public currentUser: any = null;
 
   private tokenSubject: BehaviorSubject<Token>;
   private tokenObservable: Observable<Token>;
@@ -26,13 +25,8 @@ export class AuthService {
     private util: UtilService,
   ) {
     const jwtHash = localStorage.getItem(AuthService.tokenKey);
-    let token = new Token();
-    if(jwtHash !== null && jwtHash !== '') {
-      token = this.util.jwtDecode(jwtHash);
-      //const isExpired = jwt.isTokenExpired(token);
-    }
 
-    this.tokenSubject = new BehaviorSubject<Token>(token);
+    this.tokenSubject = new BehaviorSubject<Token>(new Token());
     this.tokenObservable = this.tokenSubject.asObservable();
 
     this.permitSubject = new BehaviorSubject<Permission>(new Permission());
@@ -58,27 +52,25 @@ export class AuthService {
 
   public get userToken(): Token {
     if(this.isAuthenticated) {
-      const jwtHash = localStorage.getItem(AuthService.tokenKey);
-      if(jwtHash != null && jwtHash !== '') {
-        const token = this.util.jwtDecode(jwtHash);
-        this.tokenSubject.next(token);
-        return this.tokenSubject.value;
-      }
-    } //TODO: Verify if okay to notfound return anything when nulled.
+      const user: Token = new Token();
+      const userInfo: any = localStorage.getItem(AuthService.tokenKey+'-userinfo');
+      user.setInfo( JSON.parse(userInfo) );
+      this.tokenSubject.next(user);
+      return this.tokenSubject.value;
+    }
 
     return new Token();
   }
 
   public set setToken(jwtHash: string) {
     localStorage.setItem(AuthService.tokenKey, jwtHash);
-    const token = this.util.jwtDecode(jwtHash);
-    this.tokenSubject.next(token);
   }
 
   getInfo() {
     this.api.posts('users/get_user_info', {}).then((res: any) => {
       if(res && res.success === true && res.data) {
-        this.currentUser = res.data;
+        this.tokenSubject.next( (new Token()).setInfo(res.data) );
+        localStorage.setItem(AuthService.tokenKey+'-userinfo', JSON.stringify(this.tokenSubject.value));
       }
     }).catch(error => {
       console.log('error', error);
@@ -93,7 +85,6 @@ export class AuthService {
       if(res && res.success === true && res.data) {
         localStorage.setItem(AuthService.tokenKey, res.data);
         const decoded: Token = this.util.jwtDecode(res.data);
-        this.tokenSubject.next(decoded);
         callback({ success: res.success, data: decoded });
       } else {
         callback({ success: res.success, message: res.message });
@@ -128,6 +119,8 @@ export class AuthService {
   logout() {
       // remove user from local storage to log user out
       localStorage.removeItem(AuthService.tokenKey);
+
+      localStorage.removeItem(AuthService.tokenKey+'-userinfo');
       this.tokenSubject.next(new Token());
       this.router.navigate(['/login']);
   }

@@ -23,7 +23,7 @@ bootstrapApplication(AppComponent, {
        (req, next) => {
           const authServ = inject(AuthService);
           const isApiUrl = req.url.startsWith(environment.baseUrl);
-          if (authServ.userToken && isApiUrl) {
+          if (authServ.isAuthenticated && isApiUrl) {
               req = req.clone({
                   setHeaders: {
                     Authorization: `Bearer ${localStorage.getItem(AuthService.tokenKey)}`,
