@@ -138,4 +138,22 @@ export class UtilService {
     const jwt = new JwtHelperService();
     return jwt.decodeToken(token);
   }
+
+  private waitMessage: string[] = [
+    "Kindly hold on for a moment.",
+    "Just a moment, please.",
+    "We appreciate your patience.",
+    "Hang tight, we'll be with you shortly.",
+    "Please bear with us while we assist you.",
+    "Sit tight, we're working on it.",
+    "We're just a moment away from helping you.",
+    "Thanks for waiting, we'll be right with you.",
+    "We're in the process of assisting you, please hold on.",
+    "Your request is being processed, thank you for your patience."
+  ]
+  getWaitMessage() {
+    var random = Math.floor(Math.random() * 10);
+    return this.waitMessage[random];
+  }
+
 }
