@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { ModalService } from 'src/app/services/modal.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Token } from 'src/app/model/token.model';
 
 @Component({
   selector: 'app-account',
@@ -24,6 +25,10 @@ export class AccountPage implements OnInit {
     private app: AppComponent,
     private modal: ModalService
   ) { }
+
+  public get user(): Token {
+    return this.authServ.userToken;
+  }
 
   ngOnInit() {
     this.isDarkMode = this.app.isDarkMode;
