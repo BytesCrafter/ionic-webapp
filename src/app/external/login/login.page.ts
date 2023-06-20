@@ -52,19 +52,16 @@ export class LoginPage implements OnInit {
     }
     this.util.setSpinnerStatus = true;
 
-    this.auth.login(this.email, this.password, (result: any) => {
+    this.auth.login(this.email, this.password, async (result: any) => {
       if(result.success) {
         this.menuController.enable(true);
         this.email = '';
         this.password = '';
 
-        this.auth.getInfo();
-        this.auth.loadPermission();
+        await this.auth.getInfo();
+        await this.auth.loadPermission();
 
-        this.router.navigate(['/home'])
-          .then(() => {
-            window.location.reload();
-          });
+        this.router.navigateByUrl('/home');
       } else {
         this.util.modalAlert('Action not Allowed', result.message);
       }
