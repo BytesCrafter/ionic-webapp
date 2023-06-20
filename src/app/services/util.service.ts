@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AlertController, ToastController } from '@ionic/angular';
-import { version } from '../../../package.json';
+import packageInfo from '../../../package.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilService {
-  public version: string = version;
+  public version: any = packageInfo.version;
 
   public translations: any[] = [];
   constructor(
