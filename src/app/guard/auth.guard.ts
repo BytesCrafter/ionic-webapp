@@ -12,8 +12,7 @@ export const authGuard = () => {
   apiServ.posts('users/refresh', null)
   .then((res: any) => { console.log();
     if(res.status === 401) {
-      localStorage.clear();
-      router.navigate([`/login`]);
+      authServ.logout();
     }
 
     if(res.success) {
