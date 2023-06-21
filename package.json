@@ -1,8 +1,8 @@
 {
   "name": "ionic.app",
   "version": "0.1.0",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "BytesCrafter",
+  "homepage": "http://syntry.bytescrafter.net/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
