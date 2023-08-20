@@ -3,6 +3,12 @@
 
 /** Ionic CSS Variables **/
 :root {
+  --ion-background-color: #ffffff;
+  --ion-background-color-rgb: 255,255,255;
+
+  --ion-text-color: #000000;
+  --ion-text-color-rgb: 0,0,0;
+
 	--ion-color-primary: #004E78;
 	--ion-color-primary-rgb: 0,78,120;
 	--ion-color-primary-contrast: #ffffff;
@@ -256,4 +262,23 @@ swiper-slide {
 
   text-align: center;
   box-sizing: border-box;
+}
+
+ion-segment-button {
+  --indicator-color: var(--ion-color-light);
+  min-height: 40px;
+}
+
+/* Material Design styles */
+ion-segment-button.md {
+  --color: var(--ion-color-light);
+  --color-checked: var(--ion-color-medium);
+  --indicator-height: 4px;
+}
+
+/* iOS styles */
+ion-segment-button.ios {
+  --color: var(--ion-color-light);
+  --color-checked: var(--ion-color-medium);
+  --border-radius: 20px;
 }
