@@ -17,8 +17,14 @@ export class AppComponent {
   public isloading: boolean = false;
 
   constructor(
+    private router: Router,
     @Inject(DOCUMENT) private document: Document,
   ) {
+    let onboarded = localStorage.getItem('app-onboarding-completed');
+    if(!onboarded) {
+      this.router.navigate(['/onboarding']);
+    }
+
     // Use matchMedia to check the user preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: light)');
 

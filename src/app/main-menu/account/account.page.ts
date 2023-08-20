@@ -20,11 +20,13 @@ export class AccountPage implements OnInit {
 
   constructor(
     private authServ: AuthService,
+    private router: Router,
     private app: AppComponent,
     private modal: ModalService
   ) { }
 
   ngOnInit() {
+    this.isDarkMode = this.app.isDarkMode;
   }
 
   switchTheme(event: any) {
@@ -37,5 +39,6 @@ export class AccountPage implements OnInit {
 
   logout() {
     this.authServ.logout();
+    this.router.navigate(['/']);
   }
 }

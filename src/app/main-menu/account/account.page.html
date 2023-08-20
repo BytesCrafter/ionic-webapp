@@ -1,6 +1,39 @@
 <ion-content [fullscreen]="true">
-  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
-    <ion-icon name="sad-outline" style="font-size: 64px;"></ion-icon>
-    <p style="text-align: center; font-size: 24px;">Account! No Content Yet</p>
+  <div class="main_content_div container">
+
+      <div class="back_image" [style.backgroundImage]="'url(assets/images/background.jpg)'">
+          <div class="overlay_div">
+              <div class="icn_flex">
+                  <!-- <ion-icon name="bag" (click)="goToCart()"></ion-icon> -->
+              </div>
+              <div class="user_back" [style.backgroundImage]="'url(assets/images/user.png)'"></div>
+              <ion-label class="name_lbl">Juan Dela Cruz</ion-label>
+              <ion-label class="white_lbl">juandelacruz@bytescrafter.net</ion-label>
+          </div>
+      </div>
+
+      <div class="content_div">
+
+          <div class="white_box" style="margin-top: -40px;">
+            <div class="item_div" (click)="goToPassword()">
+              <ion-icon name="key" class="first_icn"></ion-icon>
+              <ion-label>Change Password</ion-label>
+              <ion-icon name="chevron-forward" class="last_icn"></ion-icon>
+            </div>
+            <div class="item_div" style="border: 0px;" >
+              <ion-icon name="moon" class="first_icn"></ion-icon>
+              <ion-label>Dark Theme</ion-label>
+              <ion-toggle class="last_icn" [checked]="isDarkMode" (ionChange)="switchTheme($event)"></ion-toggle>
+            </div>
+          </div>
+
+          <div class="white_box">
+              <div class="item_div" style="border: 0px;" (click)="logout()">
+                  <ion-icon name="power" class="first_icn"></ion-icon>
+                  <ion-label>Logout</ion-label>
+              </div>
+          </div>
+      </div>
+
   </div>
 </ion-content>
