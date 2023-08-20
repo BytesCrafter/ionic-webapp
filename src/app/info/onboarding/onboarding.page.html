@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true" class="ion-justify-content-evenly">
+  <swiper-container #swiper effect="coverflow" speed="700" autoplay="true" [slidesPerView]="1" [loop]="false">
+    <swiper-slide *ngFor="let slider of slideData; let i = index" lazy="true">
+      <ion-list>
+        <ion-item lines="none" class="ion-align-items-center">
+          <img src="{{slider.imageUrl}}" alt="slider" style="margin: auto;" loading="lazy"/>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-title class="ion-padding">{{slider.title}}</ion-title>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-text class="ion-padding" style="text-align: center; max-width: 576px;">
+            {{slider.description}}
+          </ion-text>
+        </ion-item>
+        <ion-item *ngIf="slider?.action" lines="none" class="ion-align-items-center">
+          <ion-button fill="clear" style="margin: auto;" (click)="continue(slider.action?.status)">
+            {{slider.action?.text}}
+            <ion-icon name="arrow-forward-outline" *ngIf="slider.action?.status === 'completed'"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </swiper-slide>
+  </swiper-container>
+</ion-content>

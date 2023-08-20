@@ -1,7 +1,7 @@
-import { Component, EnvironmentInjector, Inject, ViewChild, inject } from '@angular/core';
+import { Component, EnvironmentInjector, Inject, inject, HostListener } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +15,14 @@ export class AppComponent {
   public isDarkMode: boolean = false;
 
   constructor(
+    private router: Router,
     @Inject(DOCUMENT) private document: Document,
   ) {
+    let onboarded = localStorage.getItem('app-onboarding-completed');
+    if(!onboarded) {
+      this.router.navigate(['/onboarding']);
+    }
+
     // Use matchMedia to check the user preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: light)');
 
@@ -33,7 +39,6 @@ export class AppComponent {
 
     if(curTheme !== 'auto') {
       var onDark: boolean = curTheme=='dark'?true:false;
-      this.isDarkMode = onDark;
       this.changeTheme(onDark);
     }
   }
@@ -50,5 +55,11 @@ export class AppComponent {
     //save the theme state
     const isDark = this.document.body.classList.contains('dark');
     localStorage.setItem('app-color-scheme', isDark?'dark':'light');
+    this.isDarkMode = isDark?true:false;
+  }
+
+  @HostListener('document:keydown.control.shift.alt', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    this.changeTheme(!this.isDarkMode);
   }
 }

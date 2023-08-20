@@ -17,7 +17,16 @@ export const routes: Routes = [
       },
       {
         path: 'account',
-        loadComponent: () => import('./main-menu/account/account.page').then( m => m.AccountPage)
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('./main-menu/account/account.page').then( m => m.AccountPage)
+          },
+          {
+            path: 'change-password',
+            loadComponent: () => import('./account/change-password/change-password.component').then( m => m.ChangePasswordComponent)
+          }
+        ]
       },
       {
         path: 'feeds',
@@ -28,6 +37,10 @@ export const routes: Routes = [
         loadComponent: () => import('./main-menu/activity/activity.page').then( m => m.ActivityPage)
       },
     ]
+  },
+  {
+    path: 'onboarding',
+    loadComponent: () => import('./info/onboarding/onboarding.page').then( m => m.OnboardingPage)
   },
   {
     path: 'add-new',
