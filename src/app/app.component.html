@@ -22,4 +22,12 @@
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="main-content"></ion-router-outlet>
+  <ngx-loading
+    [show]="isloading"
+    [config]="{
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
+      tertiaryColour: '#ffffff',
+    }"
+  ></ngx-loading>
 </ion-app>

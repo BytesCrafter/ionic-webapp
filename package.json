@@ -1,8 +1,8 @@
 {
   "name": "ionic.app",
   "version": "0.1.0",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "BytesCrafter",
+  "homepage": "http://syntry.bytescrafter.net/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^15.0.0",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
+    "@auth0/angular-jwt": "^5.1.2",
     "@capacitor/app": "4.1.1",
     "@capacitor/core": "4.7.3",
     "@capacitor/haptics": "4.1.0",
@@ -27,6 +28,9 @@
     "@capacitor/status-bar": "4.1.1",
     "@ionic/angular": "^7.0.0",
     "ionicons": "^7.0.0",
+    "moment": "^2.29.4",
+    "momment": "^0.0.1",
+    "ngx-loading": "^15.0.0",
     "rxjs": "~7.5.0",
     "swiper": "^9.2.0",
     "tslib": "^2.3.0",

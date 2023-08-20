@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { ModalService } from 'src/app/services/modal.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Token } from 'src/app/model/token.model';
 
 @Component({
   selector: 'app-account',
@@ -18,10 +20,15 @@ export class AccountPage implements OnInit {
   public isDarkMode: boolean = false;
 
   constructor(
+    private authServ: AuthService,
     private router: Router,
     private app: AppComponent,
     private modal: ModalService
   ) { }
+
+  public get user(): Token {
+    return this.authServ.userToken;
+  }
 
   ngOnInit() {
     this.isDarkMode = this.app.isDarkMode;
@@ -36,6 +43,7 @@ export class AccountPage implements OnInit {
   }
 
   logout() {
-      this.router.navigate(['/']);
+    this.authServ.logout();
+    this.router.navigate(['/']);
   }
 }
