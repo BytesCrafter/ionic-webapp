@@ -1,18 +1,20 @@
 import { Component, EnvironmentInjector, Inject, ViewChild, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
   standalone: true,
-  imports: [IonicModule, RouterLink, RouterLinkActive, CommonModule],
+  imports: [IonicModule, RouterLink, RouterLinkActive, CommonModule, NgxLoadingModule],
 })
 export class AppComponent {
   public environmentInjector = inject(EnvironmentInjector);
   public isDarkMode: boolean = false;
+  public isloading: boolean = false;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
