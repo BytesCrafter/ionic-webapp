@@ -4,3 +4,8 @@ swiper-slide img {
   height: auto;
   max-height: 100%;
 }
+
+ion-content {
+  --background: none;
+  --offset-top: none;
+}
