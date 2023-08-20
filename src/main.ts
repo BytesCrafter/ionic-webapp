@@ -1,4 +1,4 @@
-import { enableProdMode, importProvidersFrom, inject } from '@angular/core';
+import { enableProdMode, importProvidersFrom, inject, isDevMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -8,6 +8,7 @@ import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthService } from './app/services/auth.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 if (environment.production) {
   enableProdMode();
@@ -38,3 +39,10 @@ bootstrapApplication(AppComponent, {
     ),
   ],
 });
+
+importProvidersFrom(ServiceWorkerModule.register('ngsw-worker.js', {
+  enabled: !isDevMode(),
+  // Register the ServiceWorker as soon as the application is stable
+  // or after 30 seconds (whichever comes first).
+  registrationStrategy: 'registerWhenStable:30000'
+}));
