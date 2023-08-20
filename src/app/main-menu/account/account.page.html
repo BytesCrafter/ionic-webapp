@@ -6,9 +6,9 @@
               <div class="icn_flex">
                   <!-- <ion-icon name="bag" (click)="goToCart()"></ion-icon> -->
               </div>
-              <div class="user_back" [style.backgroundImage]="'url(assets/images/user.png)'"></div>
-              <ion-label class="name_lbl">Juan Dela Cruz</ion-label>
-              <ion-label class="white_lbl">juandelacruz@bytescrafter.net</ion-label>
+              <div class="user_back" [style.backgroundImage]="'url('+user.image+')'"></div>
+              <ion-label class="name_lbl">{{ user.first_name }} {{ user.last_name }}</ion-label>
+              <ion-label class="white_lbl">{{ user.email }}</ion-label>
           </div>
       </div>
 

@@ -24,6 +24,9 @@ export class TabsPage {
     setTimeout(() => {
       this.isLoaded = true;
     }, 1200)
+
+    //Disabled the menu control temporarily.
+    this.menuCtrl.enable(false);
   }
 
   addNew() {
@@ -36,5 +39,9 @@ export class TabsPage {
 
   openMenu() {
     this.menuCtrl.toggle('end');
+  }
+
+  reloadPage() {
+    location.reload();
   }
 }
